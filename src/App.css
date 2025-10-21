@@ -1,0 +1,21 @@
+html,
+body {
+    background: #edf2f7;
+    margin: 0;
+    padding: 0;
+}
+main {
+    flex: 1 0 auto; /* Allows main content to grow and not shrink */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.content {
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 2em;
+}
