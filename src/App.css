@@ -19,3 +19,22 @@ main {
     gap: 20px;
     padding: 0 2em;
 }
+.button-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter {
+    margin-bottom: 1rem;
+}
+
+.filter label {
+    margin-right: 0.5rem;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}

@@ -1,16 +1,41 @@
 import { nanoid } from "nanoid";
 
-function BookForm({ addBook, closeModal }) {
+function BookForm({ addBook, updateBook, book, closeModal }) {
+    const isEditing = !!book;
+    const initialValues = isEditing
+        ? book
+        : {
+              title: "",
+              author: "",
+              publisher: "",
+              year: "",
+              language: "",
+              pages: "",
+              image: "",
+              price: "",
+              url: "",
+          };
+
     const handleSubmit = (e) => {
-        e.preventDefault();
         const data = new FormData(e.target);
         const newBook = {
-            id: nanoid(),
+            id: isEditing ? book.id : nanoid(),
             title: data.get("title"),
+            author: data.get("author"),
             publisher: data.get("publisher"),
+            publicationYear: data.get("year"),
+            language: data.get("language"),
+            pages: data.get("pages"),
             image: data.get("image"),
+            price: data.get("price"),
+            url: data.get("url"),
         };
-        addBook(newBook);
+
+        if (isEditing) {
+            updateBook(newBook);
+        } else {
+            addBook(newBook);
+        }
         e.target.reset();
         closeModal();
     };
@@ -25,6 +50,7 @@ function BookForm({ addBook, closeModal }) {
                         type='text'
                         name='title'
                         placeholder='book title'
+                        defaultValue={initialValues.title}
                     />
                 </div>
                 <div className='form-control'>
@@ -33,6 +59,7 @@ function BookForm({ addBook, closeModal }) {
                         type='text'
                         name='author'
                         placeholder='author'
+                        defaultValue={initialValues.author}
                     />
                 </div>
                 <div className='form-control'>
@@ -41,6 +68,7 @@ function BookForm({ addBook, closeModal }) {
                         type='text'
                         name='publisher'
                         placeholder='publisher'
+                        defaultValue={initialValues.publisher}
                     />
                 </div>
                 <div className='form-control'>
@@ -48,6 +76,7 @@ function BookForm({ addBook, closeModal }) {
                     <input
                         type='number'
                         name='publicationYear'
+                        defaultValue={initialValues.year}
                     />
                 </div>
                 <div className='form-control'>
@@ -56,6 +85,7 @@ function BookForm({ addBook, closeModal }) {
                         type='text'
                         name='language'
                         placeholder='language'
+                        defaultValue={initialValues.language}
                     />
                 </div>
                 <div className='form-control'>
@@ -63,6 +93,7 @@ function BookForm({ addBook, closeModal }) {
                     <input
                         type='number'
                         name='pages'
+                        defaultValue={initialValues.pages}
                     />
                 </div>
                 <div className='form-control'>
@@ -71,12 +102,13 @@ function BookForm({ addBook, closeModal }) {
                         type='url'
                         name='image'
                         placeholder='image URL'
+                        defaultValue={initialValues.url}
                     />
                 </div>
                 <button
                     className='save'
                     type='submit'>
-                    Save
+                    {isEditing ? "Update" : "Save"}
                 </button>
             </form>
         </div>

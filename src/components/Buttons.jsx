@@ -2,18 +2,25 @@ import Modal from "./Modal";
 import BookForm from "./BookForm";
 import { nanoid } from "nanoid";
 
-function Button({ books, setBooks, selectedBookId }) {
+function Button({ books, setBooks, selectedBookId, setSelectedBookId }) {
     function deleteBook() {
-        if (selectedBookId) {
-            const newBooks = books.filter((b) => b.id !== selectedBookId);
-            setBooks([...newBooks]);
-        }
+        const updatedBooks = books.filter((b) => b.id !== selectedBookId);
+        setBooks(updatedBooks);
+        setSelectedBookId(null);
     }
 
-    function addBook(newBook) {
-        setBooks([...books, newBook]);
+    function addBook(book) {
+        setBooks([...books, book]);
+    }
+    function updateBook(updatedBook) {
+        const updatedBooks = books.map((b) =>
+            b.id === updatedBook.id ? updatedBook : b
+        );
+        setBooks(updatedBooks);
+        setSelectedBookId(null);
     }
 
+    const selectedBook = books.find((b) => b.id === selectedBookId);
     return (
         <div>
             <Modal
@@ -21,9 +28,14 @@ function Button({ books, setBooks, selectedBookId }) {
                 btnLabel='Add new books!'>
                 <BookForm addBook={addBook} />
             </Modal>
-            <div>
-                <button className='edit'>Edit</button>
-            </div>
+            <Modal
+                btnClassName='edit'
+                btnLabel='Edit'>
+                <BookForm
+                    book={selectedBook}
+                    updateBook={updateBook}
+                />
+            </Modal>
             <div>
                 <button
                     className='remove'
