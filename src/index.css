@@ -11,7 +11,7 @@
     border: 4px solid #272932;
     background-color: #27293293;
     border-radius: 32px;
-    margin-left: 16px;
+    margin-left: 1rem;
     margin-bottom: 4px;
 }
 .button.selected {
@@ -21,7 +21,7 @@
 .remove,
 .edit {
     text-decoration: none;
-    margin-left: 16px;
+    margin-left: 1rem;
     cursor: pointer;
     font-weight: 600;
     border-radius: 20px;
@@ -132,4 +132,19 @@ a {
 dialog::backdrop {
     background: rgb(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
+}
+/*=====Filter=====*/
+
+.filter {
+    margin-left: 1rem;
+}
+
+.filter select {
+    font-size: 14px;
+    font-weight: 600;
+    color: #272932;
+    background-color: #90a8c3;
+    border: 2px solid #272932;
+    border-radius: 12px;
+    padding: 4px 16px;
 }

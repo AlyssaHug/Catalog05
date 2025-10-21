@@ -36,7 +36,11 @@ function App() {
                     id='author-filter'
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}>
-                    <option value=''>All Authors</option>
+                    <option
+                        className='filter-text'
+                        value=''>
+                        All Authors
+                    </option>
                     {[...authors].map((author) => (
                         <option
                             key={author}
